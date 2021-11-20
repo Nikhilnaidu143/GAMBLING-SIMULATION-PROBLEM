@@ -57,8 +57,8 @@ public class Gambling_Simulator {
 		System.out.println("Gambler total number of wins in a day :- " + num_of_wins_in_day);
 		System.out.println("Gambler total number of losses in a day :- " + num_of_losses_in_day + "\n");
 		
-		luckiestDay();   // Calling methods for UC-6 :- finding luckiest day and unluckiest day  
-		unluckiestDay();  
+		lucky_unlucky_day();   // Calling methods for UC-6 :- finding luckiest day and unluckiest day  
+		
 		
 		num_of_wins_in_day = 0;  // making zero bcoz for next day. i want to count from fresh to print every day report.
 		num_of_losses_in_day = 0; // making zero bcoz for next day. i want to count from fresh to print every day report
@@ -81,18 +81,16 @@ public class Gambling_Simulator {
 	}
 	
 	/** UC-6 :- Would also like to know my luckiest day where I won maximum and my unluckiest day where I lost maximum. **/
-	public static void luckiestDay() {
+	public static void lucky_unlucky_day() {
 		if(previous_day_win < num_of_wins_in_day) {
 			previous_day_win = num_of_wins_in_day;    // finding day with maximum wins.
 			luckiest_day = day;
 		}
-	}
-	public static void unluckiestDay() {
 		if(previous_day_loss < num_of_losses_in_day) {  
 			previous_day_loss = num_of_losses_in_day;   // finding day with maximum losses.
 			unluckiest_day = day;
 		}
-	}
+	} 
 	
 	
 	/** Main method(Program execution starts from main method.). **/
