@@ -25,10 +25,28 @@ public class Gambling_Simulator {
 		}	
 	}
 	
+	/** UC-3 :- As a Calculative Gambler if won or lost 50% of the stake, would resign for the day. **/
+	public static void gambling() {
+		int temp_balance = Account_balance;  // temporay variable to hold account balance 100.
+		// calculating 50%
+		int fifty_percent = (50/100)*temp_balance;
+		
+		while(Account_balance <= (Account_balance + fifty_percent) ||
+			  Account_balance >= (Account_balance - fifty_percent)) {
+			
+			playerWinOrLoose();  //calling playerWinOrLoose method.
+			
+			if(Account_balance == 150 || Account_balance == 50) {
+				break;
+			}
+		}
+	}
+	
+	
 	/** Main method(Program execution starts from main method.). **/
 	public static void main(String[] args) {
 		/** Displayed Welcome message **/
 		System.out.println("------------WELCOME TO GAMBLING SIMULATOR---------------\n");
-		playerWinOrLoose();
+		gambling();
 	}
 }
