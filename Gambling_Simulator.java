@@ -9,6 +9,13 @@ public class Gambling_Simulator {
 	static int num_of_wins_in_month = 0;  // This for whole month. 
 	static int num_of_losses_in_month = 0;  // This for whole month.
 	
+	/** Temporary variables for UC-6 **/
+	static int day = 0;
+	static int previous_day_win = 0;
+	static int previous_day_loss = 0;
+	static int luckiest_day;
+	static int unluckiest_day;
+	
 	//constant variable
 	static final int BET = 1;  // player bets 1 for every game.
 	
@@ -34,7 +41,7 @@ public class Gambling_Simulator {
 	public static void gambling() {
 		int temp_balance = Account_balance;  // temporay variable to hold account balance 100.
 		
-		// calculating 50%
+		// calculating 50% 
 		int fifty_percent = (50/100)*temp_balance;
 		
 		while(Account_balance <= (Account_balance + fifty_percent) ||
@@ -50,6 +57,9 @@ public class Gambling_Simulator {
 		System.out.println("Gambler total number of wins in a day :- " + num_of_wins_in_day);
 		System.out.println("Gambler total number of losses in a day :- " + num_of_losses_in_day + "\n");
 		
+		luckiestDay();   // Calling methods for UC-6 :- finding luckiest day and unluckiest day  
+		unluckiestDay();  
+		
 		num_of_wins_in_day = 0;  // making zero bcoz for next day. i want to count from fresh to print every day report.
 		num_of_losses_in_day = 0; // making zero bcoz for next day. i want to count from fresh to print every day report
 		Account_balance = 100;  // makind 100 bcoz for next day player again starts from 100 only.
@@ -57,15 +67,33 @@ public class Gambling_Simulator {
 	
 	/** UC-5 :- Each month would like to know the days won and lost and by how much. **/
 	public static void gambledForMonth() {
-		for(int day = 1; day <= 30; day++) {     // In UC-5 , it mentioned for a month so changed UC-4=20 days to 30 days.
+		for(day = 1; day <= 30; day++) {     // In UC-5 , it mentioned for a month so changed UC-4=20 days to 30 days.
 			System.out.println("DAY-" + day + " :-");
 			gambling();
 		}
+		System.out.println("-----------------------------------------------------");
+		System.out.println("Luckiest day :- " + luckiest_day);
+		System.out.println("Un-Luckiest day :- " + unluckiest_day);
 		System.out.println("-----------------------------------------------------");
 		System.out.println("Gambler total number of wins in a month :- " + num_of_wins_in_month);
 		System.out.println("Gambler total number of looses in a month :- " + num_of_losses_in_month);
 		System.out.println("-----------------------------------------------------");
 	}
+	
+	/** UC-6 :- Would also like to know my luckiest day where I won maximum and my unluckiest day where I lost maximum. **/
+	public static void luckiestDay() {
+		if(previous_day_win < num_of_wins_in_day) {
+			previous_day_win = num_of_wins_in_day;    // finding day with maximum wins.
+			luckiest_day = day;
+		}
+	}
+	public static void unluckiestDay() {
+		if(previous_day_loss < num_of_losses_in_day) {  
+			previous_day_loss = num_of_losses_in_day;   // finding day with maximum losses.
+			unluckiest_day = day;
+		}
+	}
+	
 	
 	/** Main method(Program execution starts from main method.). **/
 	public static void main(String[] args) {
